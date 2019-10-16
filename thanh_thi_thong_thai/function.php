@@ -6,7 +6,7 @@ function getToken($email, $key='example_key'){
 	$token = array(
 		"email" => $email,
 	    "iat" => time(),
-	    "expire" =>time() + 86400*2 //2 days
+	    "expire" =>time() + 86400*2 //100 days
 	);
 
 	return $jwt = JWT::encode($token, $key);

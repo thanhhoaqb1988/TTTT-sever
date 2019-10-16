@@ -44,17 +44,21 @@
 // 	echo "Bạn chưa chọn ảnh";
 // }
 include('connect/connect.php');
+// $email=$_FILES['email'];
+// $sql = "SELECT * FROM users where email = '$email'";
+// $result = $mysqli->query($sql);
+// $user = mysqli_fetch_assoc($result);
+// $id_user = $user['id'];
 if ($_FILES['image1']['name'] == '' && $_FILES['image2']['name'] == '' && $_FILES['image3']['name'] == '' && $_FILES['image4']['name'] == '' ) {
 	echo "Bạn chưa chọn ảnh";
 }
-
 else{
-	if (isset($_FILES['image1'])) {
+		if (isset($_FILES['image1'])) {
 		if ($_FILES['image1']['size']<50000) //5000 mean 500kb
 		{
 			$file = rand() . '_' .time().".jpeg";
 $target_dir = "upload/images"."/".$file;
-$sql = "INSERT INTO images(link) VALUES('$file')";
+$sql = "INSERT INTO images(link,id_product) VALUES('$file','$id_user')";
 	$result = $mysqli->query($sql);
 if (move_uploaded_file($_FILES['image1']['tmp_name'], $target_dir)) {
 	echo null;
