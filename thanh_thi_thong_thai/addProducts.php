@@ -42,6 +42,7 @@ $json = file_get_contents('php://input');
 $obj = json_decode($json, true);
 $productName = $obj['productName'];
 $description = $obj['description'];
+$DmId = $obj['DmId'];
 $email = $obj['email'];
 $sql = "SELECT * FROM users where email = '$email'";
 $result = $mysqli->query($sql);
@@ -49,17 +50,22 @@ $user = mysqli_fetch_assoc($result);
 $id_user = $user['id'];
 
 if($productName !='' && $description != ''){
-$sql = "INSERT INTO product(name,description,id_seller) VALUES('$productName','$description','$id_user')";
+$sql = "INSERT INTO product(name,description,id_seller,id_type) VALUES('$productName','$description','$id_user','$DmId')";
 	$result = $mysqli->query($sql);
 	if($result){
-		echo 'Sản phẩm đã được thêm vào Shop của bạn';
+		$sql = "SELECT id FROM product where name ='$productName' && description = '$description' ";
+		$result = $mysqli->query($sql);
+		while ($row = $result->fetch_object()){
+		    $id_product = $row;
+		}
+		print_r(json_encode($id_product));
 	}
 	else{
-		echo 'Lỗi!, xin kiểm tra lại';
+		echo (json_encode('Lỗi!, xin kiểm tra lại'));
 	}
 }
 else{
-	echo 'Bạn chưa nhập đủ thông tin';
+	echo (json_encode( 'Bạn chưa nhập đủ thông tin'));
 }
 	
 	// if (isset($_FILES['image1'])) {
