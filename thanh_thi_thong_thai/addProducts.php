@@ -1,5 +1,4 @@
 <?php
-
 // use \Firebase\JWT\JWT;
 // require __DIR__ . '/vendor/autoload.php';
 // include('function.php');
@@ -21,7 +20,6 @@
 // 		$user = mysqli_fetch_assoc($result);
 // 		$id_user = $user['id'];
 // 	}
-
 // $sql = "INSERT INTO product(name,description,id_seller) VALUES('$productName','$description','$id_user')";
 // $result = $mysqli->query($sql);
 // if ($result) {
@@ -33,9 +31,6 @@
 // catch(Exception $e){
 // 	echo 'TOKEN_KHONG_HOP_LE';
 // }
-
-
-
 //ok
 include('connect/connect.php');
 $json = file_get_contents('php://input');
@@ -48,17 +43,17 @@ $sql = "SELECT * FROM users where email = '$email'";
 $result = $mysqli->query($sql);
 $user = mysqli_fetch_assoc($result);
 $id_user = $user['id'];
-
 if($productName !='' && $description != ''){
-$sql = "INSERT INTO product(name,description,id_seller,id_type) VALUES('$productName','$description','$id_user','$DmId')";
+$sql = "INSERT INTO product(name,description,id_seller,id_list) VALUES('$productName','$description','$id_user','$DmId')";
 	$result = $mysqli->query($sql);
 	if($result){
-		$sql = "SELECT id FROM product where name ='$productName' && description = '$description' ";
+		$sql = "SELECT id,id_seller FROM product where id_seller = '$id_user' && name ='$productName' && description = '$description' ";
 		$result = $mysqli->query($sql);
 		while ($row = $result->fetch_object()){
 		    $id_product = $row;
 		}
-		print_r(json_encode($id_product));
+		$array = array('productID'=> $id_product);
+	   echo json_encode($array);
 	}
 	else{
 		echo (json_encode('Lỗi!, xin kiểm tra lại'));
@@ -80,8 +75,6 @@ else{
 	// if (isset($_FILES['image4'])) {
 	// 	move_uploaded_file($_FILES['image4']['tmp_name'], $target_dir);
 	// }
-
-
 // use \Firebase\JWT\JWT;
 // require __DIR__ . '/vendor/autoload.php';
 // include('function.php');
@@ -95,8 +88,6 @@ else{
 // 	if($decoded->expire < time()){
 // 		echo 'HET_HAN';
 // 	}else{
-
-
 // $productName = $obj['productName'];
 // $description = $obj['description'];
 // $email = $decoded->email;
@@ -122,16 +113,4 @@ else{
 // }catch(Exception $e){
 // 	echo 'TOKEN_KHONG_HOP_LE';
 // }
-
-
 ?>
-
-
-
-
-
-
-
-	
-  
- 
