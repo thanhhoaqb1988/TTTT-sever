@@ -38,13 +38,14 @@ $obj = json_decode($json, true);
 $productName = $obj['productName'];
 $description = $obj['description'];
 $DmId = $obj['DmId'];
+$price = $obj['price'];
 $email = $obj['email'];
 $sql = "SELECT * FROM users where email = '$email'";
 $result = $mysqli->query($sql);
 $user = mysqli_fetch_assoc($result);
 $id_user = $user['id'];
-if($productName !='' && $description != ''){
-$sql = "INSERT INTO product(name,description,id_seller,id_list) VALUES('$productName','$description','$id_user','$DmId')";
+if($DmId !=''){
+$sql = "INSERT INTO product(name,description,id_seller,id_list,price) VALUES('$productName','$description','$id_user','$DmId','$price')";
 	$result = $mysqli->query($sql);
 	if($result){
 		$sql = "SELECT id,id_seller FROM product where id_seller = '$id_user' && name ='$productName' && description = '$description' ";
@@ -53,14 +54,14 @@ $sql = "INSERT INTO product(name,description,id_seller,id_list) VALUES('$product
 		    $id_product = $row;
 		}
 		$array = array('productID'=> $id_product);
-	   echo json_encode($array);
+	    echo json_encode($array);
 	}
 	else{
-		echo (json_encode('Lỗi!, xin kiểm tra lại'));
+		 echo "Lỗi!, xin kiểm tra lại";
 	}
 }
 else{
-	echo (json_encode( 'Bạn chưa nhập đủ thông tin'));
+	 echo "Bạn chưa chọn Danh mục cho sản phẩm";
 }
 	
 	// if (isset($_FILES['image1'])) {
