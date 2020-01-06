@@ -3,24 +3,35 @@
 include('connect/connect.php');
 $json = file_get_contents('php://input');
 $obj = json_decode($json, true);
-$productId = $obj['productId'];
+$sellerId = $obj['sellerId'];
 $advert_name = $obj['advert_name'];
 $decreat_price = $obj['costValue'];
 $decreat_percent = $obj['percentValue'];
+$startTime = $obj['startTime'];
+$finishTime = $obj['finishTime'];
 
+// $keys=[];
+
+// $sellerId="68";
 // $productId = 123;
-// $advert_name = 'abc';
-// $before_price =123;
-// $after_price = 123;
+// $advert_name = 'adf';
+// $decreat_price ="123";
+// $decreat_percent = "123";
+// $startTime = "098777";
+// $finishTime = "098888";
 
-$sql = "INSERT INTO product_advert(id_product,advert_name,decreat_price,decreat_percent) 
-VALUES('$productId','$advert_name','$decreat_price','$decreat_percent')";
+$sql = "INSERT INTO product_advert(id_seller,advert_name,decreat_price,decreat_percent,start_time,end_time) 
+VALUES('$sellerId','$advert_name','$decreat_price','$decreat_percent','$startTime','$finishTime')";
 $result = $mysqli->query($sql);
 if ($result) {
-		echo "Ok";
+		echo 'Ok';
 	}else{
-		echo "Fail";
+		echo 'NotSucces';
 	}
+
+
+
+
  ?>
 
 
