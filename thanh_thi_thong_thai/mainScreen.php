@@ -1,7 +1,7 @@
 <?php
 
 include('connect/connect.php');
-$query = $mysqli->query(" SELECT *FROM hot_news ");
+$query = $mysqli->query(" SELECT *FROM imagestaoct where is_chosed = '1' ");
 while ($row = $query-> fetch_object()){
 	  $hot_news[] = $row;
 }
