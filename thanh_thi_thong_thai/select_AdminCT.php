@@ -6,9 +6,11 @@
     $obj = json_decode($json, true);
     //$id_seller= $obj['sellerId'];
      //$id_seller= '68';
-	$products = $mysqli->query("SELECT * FROM imagestaoct i group by i.id LIMIT 0,6");
+	$products = $mysqli->query("SELECT * , GROUP_CONCAT(l.list_name) AS listCT FROM imagestaoct i LEFT JOIN list_cuact l ON l.maCT= i.maCT where i.is_chosed='1'  group by i.id LIMIT 0,6");
 	while ($row = $products->fetch_object()){
-	    $AdminCT[] = $row;
+	   $assignees = explode(',', $row->listCT);
+		$row->listCT = $assignees;
+	   $AdminCT[] = $row;
 	};	
 
 	$array = array('AdminCT'=>$AdminCT);
