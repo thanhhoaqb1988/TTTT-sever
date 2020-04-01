@@ -17,7 +17,7 @@ $sql1 = "UPDATE product SET sale ='$id_advert' WHERE id = '$productId' ";
 
 $result1 = $mysqli->query($sql1);
 if ($result1) {
-	echo 'OK';;
+	echo 'OK';
 } else{
 	echo 'Fail';
 }

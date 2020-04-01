@@ -14,7 +14,7 @@ try{
 		echo 'HET_HAN';
 	}
 	else{
-		$jwt = getToken($decoded->email);
+		$jwt = getToken($decoded->phone);
 		print_r($jwt);
 	}
 }

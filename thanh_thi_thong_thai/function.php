@@ -2,11 +2,11 @@
 //function
 use \Firebase\JWT\JWT;
 require __DIR__ . '/vendor/autoload.php';
-function getToken($email, $key='example_key'){
+function getToken($phone, $key='example_key'){
 	$token = array(
-		"email" => $email,
+		"phone" => $phone,
 	    "iat" => time(),
-	    "expire" =>time() + 86400*2 //100 days
+	    "expire" =>time() + 86400*10 //10 days
 	);
 
 	return $jwt = JWT::encode($token, $key);

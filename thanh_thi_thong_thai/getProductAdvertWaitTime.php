@@ -4,8 +4,8 @@
 	//$id_seller=$_POST["sellerId"];
 	$json = file_get_contents('php://input');
     $obj = json_decode($json, true);
-    $id_seller= $obj['sellerId'];
-    //$id_seller= '1';
+    //$id_seller= $obj['sellerId'];
+    $id_seller= '69';
 	$query = $mysqli->query("SELECT p.id,p.id_seller,p.id_product, p.advert_name,p.start_time,p.end_time FROM product_advert p  where p.id_seller = '$id_seller' ");
 	while ($row = mysqli_fetch_assoc($query)){
 	  $productAdvertWaitTime[] = $row;

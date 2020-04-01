@@ -4,19 +4,18 @@ use \Firebase\JWT\JWT;
 require __DIR__ . '/vendor/autoload.php';
 include('function.php');
 include('connect/connect.php');
-
 $key = "example_key";
 $json = file_get_contents('php://input');
 $obj = json_decode($json, true);
-$email = $obj['email'];
+$phone = $obj['phoneNumber'];
 $password = md5($obj['password']);
-$sql = "SELECT u.id,u.email, u.name, u.address, u.phone FROM users u where email = '$email' and password = '$password'";
+$sql = "SELECT u.* FROM users u where phone = '$phone' and password = '$password'";
 $result = $mysqli->query($sql);
 
 $user = mysqli_fetch_assoc($result);
 
 if($user){
-	$jwt = getToken($email);
+	$jwt = getToken($phone);
 	$array = array('token'=>$jwt, 'user'=>$user);
 	print_r(json_encode($array));
 }

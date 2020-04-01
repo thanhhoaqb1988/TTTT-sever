@@ -14,16 +14,16 @@ try{
 		echo 'HET_HAN';
 	}
 	else{
-		$jwt = getToken($decoded->email);
+		$jwt = getToken($decoded->phone);
 		$decoded = JWT::decode($jwt, $key, array('HS256'));
-		$email = $decoded->email;
-		$sql = "SELECT * FROM users where email = '$email'";
+		$phone = $decoded->phone;
+		$sql = "SELECT * FROM users where phone = '$phone'";
 		$result = $mysqli->query($sql);
 
 		$user = mysqli_fetch_assoc($result);
 
 		if($user){
-			$jwt = getToken($email);
+			$jwt = getToken($phone);
 			$array = array('token'=>$jwt, 'user'=>$user);
 			print_r(json_encode($array));
 		}
