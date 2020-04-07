@@ -5,6 +5,7 @@ $json = file_get_contents('php://input');
 $obj = json_decode($json, true);
 $sellerId = $_POST["sellerId"];
 $freeShip = $_POST["freeShip"];
+$shopAdress = $_POST["shopAdress"];
 
 		if (isset($_FILES['image1']) && isset($_FILES['image2'])) {
 		if ($_FILES['image1']['size']<50000) //5000 mean 500kb
@@ -13,7 +14,7 @@ $freeShip = $_POST["freeShip"];
 			$file2 = rand() . '_' .time().".jpeg";
 $target_dir1 = "upload/shopInfor"."/".$file1;
 $target_dir2 = "upload/shopInfor"."/".$file2;
-$sql = "INSERT INTO shopInfor(sellerId,link1,link2,freeShip) VALUES('$sellerId','$file1','$file2','$freeShip')";
+$sql = "INSERT INTO shopInfor(sellerId,link1,link2,freeShip,shopAdress) VALUES('$sellerId','$file1','$file2','$freeShip','$shopAdress')";
 	$result = $mysqli->query($sql);
 if (move_uploaded_file($_FILES['image1']['tmp_name'], $target_dir1)) {
 	echo 'Thiết lập thành công';

@@ -46,7 +46,6 @@ $sql = "SELECT * FROM users where phone = '$phone'";
 $result = $mysqli->query($sql);
 $user = mysqli_fetch_assoc($result);
 $id_user = $user['id'];
-if($DmId !=''){
 $sql = "INSERT INTO product(name,description,id_seller,id_list,price,id_listb,id_lista) VALUES('$productName','$description','$id_user','$DmId','$price','$id_listb','$id_lista')";
 	$result = $mysqli->query($sql);
 	if($result){
@@ -61,10 +60,8 @@ $sql = "INSERT INTO product(name,description,id_seller,id_list,price,id_listb,id
 	else{
 		 echo "Lỗi!, xin kiểm tra lại";
 	}
-}
-else{
-	 echo "Bạn chưa chọn Danh mục cho sản phẩm";
-}
+
+
 	
 	// if (isset($_FILES['image1'])) {
 	// 	move_uploaded_file($_FILES['image1']['tmp_name'], $target_dir);
