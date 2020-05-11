@@ -1,39 +1,30 @@
 <?php
 
-$connect = mysqli_connect("localhost", "root","","thanh thi thong thai");
-  mysqli_query($connect, "SET NAMES 'utf8'");
-$query = " SELECT *FROM sellerCenter_header ";
-$dataheader = mysqli_query($connect, $query);
-
-while ($row = mysqli_fetch_assoc($dataheader)){
+include('connect/connect.php');
+$query = $mysqli->query(" SELECT *FROM sellerCenter_header ") ;
+while ($row = mysqli_fetch_assoc($query)){
 	  $header[] = $row;
 }
 
-$query1 = " SELECT *FROM sellerCenter_ttdn ";
-$datattdn = mysqli_query($connect, $query1);
+$query1 = $mysqli->query(" SELECT *FROM sellerCenter_ttdn ");
 
-while ($row = mysqli_fetch_assoc($datattdn)){
+while ($row = mysqli_fetch_assoc($query1)){
 	$ttdn[] = $row;
 }
-$query2 = " SELECT *FROM sellerCenter_dangtaidn ";
-$datadangtaidn = mysqli_query($connect, $query2);
+$query2 =$mysqli->query( " SELECT *FROM sellerCenter_dangtaidn ");
 
-while ($row = mysqli_fetch_assoc($datadangtaidn)){
+while ($row = mysqli_fetch_assoc($query2)){
   $dtdn[] = $row;
 }
-$query3 = " SELECT *FROM sellerCenter_loaisp ";
-$dataloaisp = mysqli_query($connect, $query3);
+$query3 = $mysqli->query(" SELECT *FROM sellerCenter_loaisp ");
 
-while ($row = mysqli_fetch_assoc($dataloaisp)){
+while ($row = mysqli_fetch_assoc($query3)){
   $loaisp[] = $row;
 }
-$query4 = " SELECT *FROM sellercenter_sanphamdn ";
-$datasanphamdn = mysqli_query($connect, $query4);
-
-while ($row = mysqli_fetch_assoc($datasanphamdn)){
+$query4 =  $mysqli->query (" SELECT *FROM sellercenter_sanphamdn ") ;
+while ($row = mysqli_fetch_assoc($query4)){
   $sanphamdn[] = $row;
 }
-
   $array = array('header'=>$header,'ttdn'=>$ttdn, 'dtdn'=>$dtdn , 'loaisp'=>$loaisp, 
     'sanphamdn'=>$sanphamdn);
    echo json_encode($array);

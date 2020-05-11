@@ -13,12 +13,12 @@ if ($result) {
 $sql = "UPDATE product SET sale = '0' WHERE id = '$productId' ";
 $result = $mysqli->query($sql);
 if ($result) {
-	echo "OK";
+	echo "Kết thúc chương trình thành công";
 } else{
-	echo "Fail";
+	echo "Lỗi";
 }
 	}else{
-		echo "Fail";
+		echo "Lỗi";
 	}
  ?>
 
